@@ -1,4 +1,5 @@
 from django.shortcuts import render, HttpResponse
+from .models import Item
 
 # Create your views here.
 # All django view functions have to take a request as an argument
@@ -6,4 +7,5 @@ from django.shortcuts import render, HttpResponse
 
 # render html template
 def get_todo_list(request):
-    return render(request, "todo_list.html")
+    results = Item.objects.all()
+    return render(request, "todo_list.html", {'items': results})
