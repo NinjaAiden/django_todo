@@ -7,5 +7,7 @@ from .models import Item
 
 # render html template
 def get_todo_list(request):
+    # get all objects from item subgroup
     results = Item.objects.all()
+    # render HTML page, passing request and item objects
     return render(request, "todo_list.html", {'items': results})

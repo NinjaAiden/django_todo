@@ -20,6 +20,7 @@
             <td>{{ item.name }}</td>
             {% endif %}
         </tr>
+        <!-- display message if no items in for loop -->
         {% empty %}
         <p>You have nothing to do.</p>
         {% endfor %}
