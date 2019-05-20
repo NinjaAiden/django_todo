@@ -16,6 +16,16 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
+# import say_hello function from views in todo subfolder
+from todo.views import say_hello
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    # specify url for say_hello function
+    # r identifies the following statement as a regular expression
+    # ^$ identifies the route, variable name must be the same as a function name to be valid
+    # ^ identifies start of the route expression
+    # $ identifies the end of the route expression
+    # removing either of these allows for extra routing to be placed before / after route name without recieving an error
+    url(r'^$', say_hello)
 ]
