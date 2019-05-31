@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse, redirect
+from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 from .models import Item
 from .forms import ItemForm
 
@@ -27,4 +27,22 @@ def create_an_item(request):
             return redirect(get_todo_list)
     else:
         form = ItemForm()
+    return render(request, "item_form.html", {'form': form})
+
+def edit_an_item(request, id):
+    
+    item = get_object_or_404(Item, pk=id)
+    
+    # check if POST method
+    if request.method == "POST":
+        
+        # get form from forms.py file
+        form = ItemForm(request.POST, instance=item)
+        # check if form is valid
+        if form.is_valid():
+            # save form and redirect to main page
+            form.save()
+            return redirect(get_todo_list)
+    else:
+        form = ItemForm(instance=item)
     return render(request, "item_form.html", {'form': form})

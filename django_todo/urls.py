@@ -17,7 +17,7 @@ from django.conf.urls import url
 from django.contrib import admin
 
 # import function from views in todo subfolder
-from todo.views import get_todo_list, create_an_item
+from todo.views import get_todo_list, create_an_item, edit_an_item
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -29,5 +29,10 @@ urlpatterns = [
     # removing either of these allows for extra routing to be placed before / after route name without recieving an error
     url(r'^$', get_todo_list),
     # 'add' is the url link
-    url(r'^add$', create_an_item)
+    url(r'^add$', create_an_item),
+    # ?P tells the routing system that this is an expression
+    # angular brackets bind the data to the query
+    # '\d' is a regex for digit or int
+    # adding a '+' allows for multiple digits instead of a single number
+    url(r'^edit/(?P<id>\d+)$', edit_an_item)
 ]
