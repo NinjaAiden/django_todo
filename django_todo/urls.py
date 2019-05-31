@@ -17,7 +17,7 @@ from django.conf.urls import url
 from django.contrib import admin
 
 # import function from views in todo subfolder
-from todo.views import get_todo_list, create_an_item, edit_an_item
+from todo.views import get_todo_list, create_an_item, edit_an_item, toggle_status
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -34,5 +34,6 @@ urlpatterns = [
     # angular brackets bind the data to the query
     # '\d' is a regex for digit or int
     # adding a '+' allows for multiple digits instead of a single number
-    url(r'^edit/(?P<id>\d+)$', edit_an_item)
+    url(r'^edit/(?P<id>\d+)$', edit_an_item),
+    url(r'^toggle/(?P<id>\d+)$', toggle_status)
 ]
