@@ -1,5 +1,6 @@
 from django.shortcuts import render, HttpResponse, redirect
 from .models import Item
+from .forms import ItemForm
 
 # Create your views here.
 # All django view functions have to take a request as an argument
@@ -16,14 +17,14 @@ def get_todo_list(request):
 def create_an_item(request):
     # check if POST method
     if request.method == "POST":
-        # initialise new item
-        new_item = Item()
-        # get item's name and bind it to instance
-        new_item.name = request.POST.get('name')
-        # bind boolean done state to item
-        new_item.done = 'done' in request.POST
-        # save item to database
-        new_item.save()
         
-        return redirect(get_todo_list)
-    return render(request, "item_form.html")
+        # get form from forms.py file
+        form = ItemForm(request.POST, request.FILES)
+        # check if form is valid
+        if form.is_valid():
+            # save form and redirect to main page
+            form.save()
+            return redirect(get_todo_list)
+    else:
+        form = ItemForm()
+    return render(request, "item_form.html", {'form': form})
