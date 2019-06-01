@@ -26,7 +26,8 @@ SECRET_KEY = '%_52z(xu)=uxr$hpk3r2bsv+&iq1mcy2n_^9*x$tbzwdki$%pu'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['django-todo-ninjaaiden.c9users.io', 'simple-django-organiser.herokuapp.com']
+ALLOWED_HOSTS = [os.environ.get('C9_HOSTNAME'), 
+    os.environ.get('HOSTNAME')]
 
 
 # Application definition
